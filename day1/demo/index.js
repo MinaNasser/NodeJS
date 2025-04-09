@@ -1,4 +1,4 @@
-bconst fs = require("fs"); // import 
+const fs = require("fs"); // import 
 const readLine = require('readline');
 
 const r1 = readLine.createInterface({
