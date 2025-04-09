@@ -1,5 +1,6 @@
 const fs = require("fs");
 const readline = require("readline");
+var validator = require('validator');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -11,11 +12,24 @@ async function registerUser() {
     const username = await askOp.ask("Enter username: ");
     const plainPassword = await askOp.ask("Enter password: ");
     const hashedPassword = await passwordUtils.hashPassword(plainPassword);
-
+    // add Email
+    const email = await askOp.ask("Enter email: ");
+//    validate email
+    // const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    // if (!emailRegex.test(email)) {
+    //     console.log("Invalid email format.");
+    //     rl.close();
+    //     return;
+    // }else {
+    //     console.log("Email is valid.");
+    // }
+    // validate email with library
+    validator.isEmail(email);
     const newUser = {
         username: username,
         password: hashedPassword,
-        registeredAt: new Date().toISOString()
+        registeredAt: new Date().toISOString(),
+        email: email
     };
 
     let users = [];
