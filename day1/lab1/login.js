@@ -1,37 +1,39 @@
 const fs = require("fs");
-// import from Prompt.js
-const prompt = require("./prompt");
-const readline = require("readline");
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const bcrypt = require("bcrypt");
+const askOp = require("./askOperation");
+const pa = require("./passOperation");
 
-function logUserInfo() {
-  rl.question("How many users will be registered? ", async (countStr) => {
-    const count = parseInt(countStr);
-    const logStream = fs.createWriteStream("log.txt", { flags: "a" });
+async function promptLogin() {
+  console.log("\n--- Login ---");
+  console.log("Enter your username and password to login.");
+  console.log("----------------------------------");
 
-    for (let i = 0; i < count; i++) {
-      await new Promise((resolve) => {
-        rl.question(`Enter name for user ${i + 1}: `, (name) => {
-          rl.question(`Enter age for user ${i + 1}: `, (ageStr) => {
-            const age = parseInt(ageStr);
-            const status = age >= 18 ? "Adult" : "Underage";
-            const timestamp = new Date().toISOString().replace("T", " ").split(".")[0];
-            const logEntry = `[${timestamp}] Name: ${name}, Age: ${age}, Status: ${status}\n`;
-            logStream.write(logEntry);
-            console.log(" Logged:", logEntry.trim());
-            resolve();
-          });
-        });
-      });
-    }
+  const usernameInput = await askOp.ask("Enter your username: ");
+  const passwordInput = await askOp.ask("Enter your password: ");
 
-    logStream.end();
-    promptLogin();
-  });
+  let users = [];
+  try {
+    const data = fs.readFileSync("users.json", "utf8");
+    users = JSON.parse(data);
+  } catch (err) {
+    console.error("Error reading users.json:", err);
+    return;
+  }
+
+  const foundUser = users.find(u => u.username === usernameInput);
+
+  if (!foundUser) {
+    console.log(" User not found.");
+    return;
+  }
+
+  const isMatch = await pa.comparePassword(passwordInput, foundUser.password);
+
+  if (isMatch) {
+    console.log(" Login successful!");
+  } else {
+    console.log(" Incorrect password.");
+  }
 }
-module.exports = logUserInfo;
 
-
+module.exports = promptLogin;
