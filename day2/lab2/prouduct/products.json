@@ -1,0 +1,76 @@
+{
+  "products": [
+    {
+      "name": "Wi",
+      "price": 39.99
+    },
+    {
+      "name": "fgfggf",
+      "price": 10000
+    },
+    {
+      "name": "Wireless Charger",
+      "price": 39.99
+    },
+    {
+      "name": "4K TV",
+      "price": 899.99
+    },
+    {
+      "name": "Gaming Monitor",
+      "price": 299.99
+    },
+    {
+      "name": "Bluetooth Speaker",
+      "price": 79.99
+    },
+    {
+      "name": "Wireless Mouse",
+      "price": 29.99
+    },
+    {
+      "name": "Mechanical Keyboard",
+      "price": 149.99
+    },
+    {
+      "name": "Smart Thermostat",
+      "price": 120.99
+    },
+    {
+      "name": "Electric Toothbrush",
+      "price": 89.99
+    },
+    {
+      "name": "Action Camera",
+      "price": 149.99
+    },
+    {
+      "name": "VR Headset",
+      "price": 299.99
+    },
+    {
+      "name": "Portable Power Bank",
+      "price": 39.99
+    },
+    {
+      "name": "Smart Bulb",
+      "price": 19.99
+    },
+    {
+      "name": "Electric Kettle",
+      "price": 45.99
+    },
+    {
+      "name": "Fitness Tracker",
+      "price": 59.99
+    },
+    {
+      "name": "Robot Vacuum",
+      "price": 249.99
+    },
+    {
+      "name": "Smart Door Lock",
+      "price": 169.99
+    }
+  ]
+}

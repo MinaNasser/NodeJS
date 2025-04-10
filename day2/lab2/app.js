@@ -6,7 +6,16 @@ const logger = require("./logging");
 const routeCounter = require("./routeCounter");
 const passwordService = require("./passHandler");
 const fs = require("fs");
+const bodyParser = require('body-parser');
 
+// Import the routes from the routes.js file
+const routes = require('./prouduct/routes');
+
+// Use body-parser middleware to parse JSON request bodies
+app.use(bodyParser.json());
+
+// Use the routes defined in routes.js
+app.use('/api', routes);
 
 
 
