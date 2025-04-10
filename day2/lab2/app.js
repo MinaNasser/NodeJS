@@ -43,6 +43,17 @@ app.get("/register/:email/:password", (req, res) => {
   res.send("User registered successfully");
 });
 
+app.get("/login/:email/:password", (req, res) => {
+  const { email, password } = req.params;
+  users = JSON.parse(fs.readFileSync("users.json"));
+  const user = users.find((user) => user.email === email);
+  const hashedPassword = passwordService.comparePassword(password,user.hashedPassword);
+  if (user&&hashedPassword) {
+    res.send("Login successful");
+  } else {
+    res.send("Invalid email or password");
+  }
+})
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

@@ -35,6 +35,15 @@ app.get("/register/:email/:password", (req, res) => {
   res.send("User registered successfully");
 });
 
+/*
+iii)	get method “/login/:email/:password”, then check if user exist and password is correct
+*/
+
+
+
+
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

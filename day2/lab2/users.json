@@ -2,5 +2,13 @@
   {
     "email": "Negm@Gamil",
     "hashedPassword": "$2b$10$fJPuUshCrK8co6Bp7eaqXumGlzamP/Cd5h7cVHlL9aDdka65UvtIK"
+  },
+  {
+    "email": "Negm@Gamil",
+    "hashedPassword": "$2b$10$ONn3XQZl8EPAFXHGpvRqpOXnxlp9zFAOYmTkEeVJfu6RKYDwnKA8q"
+  },
+  {
+    "email": "Negm@Gamil",
+    "hashedPassword": "$2b$10$jLVqNfu6HHwgGQozUIVOqe08/AGcBCBtw1tVnJOoW6CaW53kElYWu"
   }
 ]
