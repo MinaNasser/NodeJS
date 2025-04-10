@@ -4,11 +4,6 @@ const port = 3000;
 
 const logger = require("./logging");
 const routeCounter = require("./routeCounter");
-const passwordService = require("./passHandler");
-const fs = require("fs");
-
-
-
 
 app.use(logger);        
 
@@ -32,14 +27,11 @@ app.get("/welcome/:username", (req, res) => {
 /*
 ii)	get method “/register/:email/:password”, then hash password and save user in array json file 
 */
-
-let users = [];
 app.get("/register/:email/:password", (req, res) => {
   const { email, password } = req.params;
-  const hashedPassword = passwordService.hashPassword(password);
+  const hashedPassword = hashPassword(password);
   const user = { email, hashedPassword };
   users.push(user);
-  fs.writeFileSync("users.json", JSON.stringify(users, null, 2));
   res.send("User registered successfully");
 });
 
