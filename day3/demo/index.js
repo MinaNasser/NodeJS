@@ -87,24 +87,34 @@ app.put("/users/:id", function (req, res) {
     user.age = age;
     res.send(user);
 });
-app.patch("/users/:id", function (req, res) {
-    const {id} = req.params;
-    const obj = req.body;
-    
-    users = users.map((user, index) => {
-        if(index == id-1){
-            console.log(user);
-            return {...user, ...obj};
+app.patch('/todos/:id', (req, res) => {
+    const { id } = req.params;
+    const updateData = req.body;
 
+    let todos = [];
+    try {
+        todos = JSON.parse(fs.readFileSync('todos.json', 'utf-8'));
+    } catch (err) {
+        return res.status(500).send({ error: "Failed to read todos" });
+    }
+
+    let found = false;
+    todos = todos.map(todo => {
+        if (todo.id === parseInt(id)) {
+            found = true;
+            return { ...todo, ...updateData };
         }
-
-        return user;
+        return todo;
     });
 
+    if (!found) {
+        return res.status(404).send({ error: "todo not found" });
+    }
 
-    res.status(201).send(users);
-
+    fs.writeFileSync('todos.json', JSON.stringify(todos, null, 2));
+    res.status(200).send({ message: "todo updated successfully", todos });
 });
+
 
 app.put("/users/:id", function (req, res) {
     const { id } = req.params;
