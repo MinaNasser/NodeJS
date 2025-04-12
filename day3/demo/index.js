@@ -1,21 +1,138 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const app = express();
 
+app.use(express.static('static'));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-
-
-
+let users = [];
 function userValidation(req,res,next){
     console.log('User Validation');
     next();
 }
+app.get('/',function(req,res){
+    res.redirect('index.html');
+})
 
-app.get('/index',function(req,res){
-    res.send('Hello');
+app.get("/index", (req, res) => {
+    // let mypath = path.join(__dirname, "static", "index.html");
+    // console.log(mypath);
+
+    // res.sendFile(mypath);
+    res.redirect("/index.html")
 })
-app.get('/users',userValidation,function(req,res){
-    res.send('Login');
+// app.get('/users',userValidation,function(req,res){
+//     res.send('Login');
+// })
+// app.get('/users/:id',function(req,res){
+//     res.send(req.params.id);
+// })
+// app.get("/add-user", function (req, res) {
+//     const username = req.query.username;
+//     const password = req.query.password;
+//     const age = req.query.age;
+//     console.log(username, password, age);
+//     const user = {
+//         username: username,
+//         password: password,
+//         age: age
+//     }
+//     res.send(user);
+// });
+app.get("/users", function (req, res) {
+    res.send(users);
+});
+app.post("/add-user", function (req, res) {
+    const user = req.body;
+
+    users.push(user);
+
+    const token = jwt.sign(user, 'secretkey');
+
+    res.status(201).send({
+        message: "User added",
+        token: token
+    });
+});
+
+
+// app.get("/users/:id", function (req, res) {
+//     const id = req.params.id;
+//     const user = users[id];
+//     res.send(user);
+// });
+// app.put("/users/:id", function (req, res) {
+//     const id = req.params.id;
+//     const user = users[id];
+//     const username = req.body.username;
+//     const age = req.body.age;
+//     user.username = username;
+//     user.age = age;
+//     res.send(user);
+// });
+app.delete("/users/:id", function (req, res) {
+    const id = req.params.id;
+    const user = users.filter((user) => user.id != id);
+
+    users.splice(id, 1);
+    res.send(user);
 })
+app.put("/users/:id", function (req, res) {
+    const id = req.params.id;
+    const user = users.filter((user) => user.id != id);
+    const username = req.body.username;
+    const age = req.body.age;
+    user.username = username;
+    user.age = age;
+    res.send(user);
+});
+app.patch("/users/:id", function (req, res) {
+    const {id} = req.params;
+    const obj = req.body;
+    
+    users = users.map((user, index) => {
+        if(index == id-1){
+            console.log(user);
+            return {...user, ...obj};
+
+        }
+
+        return user;
+    });
+
+
+    res.status(201).send(users);
+
+});
+
+app.put("/users/:id", function (req, res) {
+    const { id } = req.params;
+    const obj = req.body;
+
+    const index = users.findIndex(user => user.id === parseInt(id));
+
+    if (index === -1) {
+        return res.status(404).send({ message: "User not found" });
+    }
+
+    users[index] = { id: parseInt(id), ...obj };
+
+    res.send(users[index]);
+});
+
+
+app.post("/users/enc", function (req, res) {
+    const {token} = req.body;
+    const decoded = jwt.verify(token, 'secretkey');
+    res.send(decoded);
+
+})
+
+
+
+
+
 
 
 
