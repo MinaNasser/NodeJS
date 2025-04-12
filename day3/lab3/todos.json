@@ -1,1 +1,38 @@
-[{"id":2,"title":"Go to gym","status":false},{"id":2,"title":"Learn Node.js","status":false}]
+[
+  {
+    "id": 3,
+    "title": "Read a book",
+    "status": false
+  },
+  {
+    "id": 4,
+    "title": "Read a book",
+    "status": false
+  },
+  {
+    "id": 3,
+    "title": "Read a book",
+    "status": false
+  },
+  {
+    "id": 4,
+    "title": "Read a book",
+    "status": false
+  },
+  {
+    "id": 5,
+    "title": "Read a book",
+    "status": false,
+    "message": "todo status updated to true"
+  },
+  {
+    "id": 6,
+    "title": "Read a book",
+    "status": false
+  },
+  {
+    "id": 7,
+    "title": "Read a book",
+    "status": false
+  }
+]
