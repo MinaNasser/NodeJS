@@ -1,0 +1,37 @@
+[
+  {
+    "user": "negm",
+    "age": "22",
+    "address": "aswan"
+  },
+  {
+    "user": "ahmed",
+    "age": "30",
+    "address": "alex"
+  },
+  {
+    "user": "ali",
+    "age": "23",
+    "address": "aswan"
+  },
+  {
+    "user": "ali",
+    "age": "23",
+    "address": "aswan"
+  },
+  {
+    "user": "hager",
+    "age": "20",
+    "address": "cairo"
+  },
+  {
+    "user": "negm",
+    "age": "22",
+    "address": "aswan"
+  },
+  {
+    "user": "negm",
+    "age": "111",
+    "address": "aswan"
+  }
+]
