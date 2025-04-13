@@ -1,6 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const fs=require('fs');
+const { error } = require('console');
 
 const app = express();
 const secretKey = 'secretAl5al';
@@ -9,16 +10,15 @@ const port = 3000
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
-/*
-- Register a user with the following required attributes Username,password , firstName
-Notes: 
-- Write the user to a file
-- Return ({message:”user was registered and token  successfully”}) if success
-- Return ({error:”{Attribute name} is required” if there is a validation error with 422 status code 
-
-
-*/
-// let users = [];
+app.post('/Account/Register',(req,res)=>{
+    const {name , password ,email}= req.body
+    if(!name){
+        return res.status(422).send({error: "name is not valid"});
+    }
+    if(!password){
+        
+    }
+})
 
 
 app.post('/user/register', (req, res) => {
@@ -186,3 +186,4 @@ app.patch('/todos/:id', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+
