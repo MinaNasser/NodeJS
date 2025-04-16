@@ -19,6 +19,7 @@ async function loadProducts() {
   } else {
     table = $("#productsTable").DataTable({
       data: products,
+      pageLength: 3,    
       columns: [
         { data: "name" },
         { data: "price" },
@@ -123,6 +124,12 @@ async function editProduct(id) {
   productPriceInput.value = product.price;
   productQuantityInput.value = product.quantity;
   productModalLabel.textContent = "Edit Product";
+  productNameInput.disabled = false;
+  productPriceInput.disabled = false;
+  productQuantityInput.disabled =  false;
+
+  if (saveBtn) saveBtn.style.display = 'block';
+  if (cancelBtn) cancelBtn.style.display = 'block';
 
   productModal.show();
 }
