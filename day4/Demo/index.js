@@ -1,7 +1,8 @@
 const express = require('express')
 const multer = require('multer')
 const DB = require('./DB');
-const Joi = require('joi')
+const Joi = require('joi');
+const { asyncWarper } = require('./utils/errHandler');
 
 const app = express()
 const port = 3000;
@@ -44,7 +45,16 @@ const upload = multer({ storage: storage })
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
-app.post('/upload', multer({ storage: storage }).single('file'), (req, res) => {
+app.post('/upload', multer({ storage: storage }).single('file'),
+asyncWarper(async (req, res) => {
+    const { error } = Schema.validate(req.body)
+    if (error) {
+        return res.status(400).json({
+            message: error.details[0].message
+        })
+    }
+}),
+ (req, res) => {
     res.send('Uploaded!')
 })
 app.listen(port, () => {
